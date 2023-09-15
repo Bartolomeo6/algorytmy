@@ -37,7 +37,54 @@ public class Main {
         String tekst = klawa.nextLine();
         String haslo = szyfruj(tekst,3);
 
-        System.out.println(haslo);
+        System.out.println("Twoj tekst: "+tekst+"\n to teraz: "+haslo);         //szyfr
 
+        System.out.println("------------------------------------");
+
+        System.out.println(generujHaslo(9));        //generacja hasla
+
+    }
+
+    // ---------------------------------------------------------------- //
+
+    //  LOSOWANIE HASLA 20-ZNAKOWEGO //
+
+    public static String generujHaslo(int dl) {
+        String password = "";
+
+        String wszystkieZnaki = "";
+        String maleLitery = "qwertyuiopasdfghjklzxcvbnm";
+        String duzeLitery = "QWERTYUIOPASDFGHJKLZXCVBNM";
+        String znakiSpecjalne = "!@#$%^&*()_+{}:.,|<>?";
+        String cyfry = "1234567890";
+
+        wszystkieZnaki = maleLitery + duzeLitery + znakiSpecjalne + cyfry;
+
+        for (int i = 0; i < dl; i++) {
+            int losowa = (int)(Math.random()*wszystkieZnaki.length());
+            password += wszystkieZnaki.charAt(losowa);
+        }
+
+        boolean czyMalaLitera = czyHasloZawieraCos(password, maleLitery);
+        boolean czyDuzaLitera = czyHasloZawieraCos(password,duzeLitery);
+        boolean czyZnakSpecjalny = czyHasloZawieraCos(password,znakiSpecjalne);
+        boolean czyCyfra = czyHasloZawieraCos(password,cyfry);
+
+        //TODO: DOKOŃCZ
+
+        return password;
+    }
+
+    public static boolean czyHasloZawieraCos(String haslo, String ciag) {
+        for (int i = 0; i < ciag.length(); i++) {
+
+            char litera = ciag.charAt(i);
+            if(haslo.indexOf(litera) >= 0) {
+                return true;
+            }
+
+        }
+
+        return false;
     }
 }
